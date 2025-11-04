@@ -29,7 +29,7 @@ ML/NLP: TF-IDF + Cosine Similarity (scikit-learn)
 Frontend: HTML, CSS, Jinja Templates
 
 ⚙️ Installation
-git clone https://github.com/yourusername/AI-Powered-Resume-Screening-System.git
+git clone https://github.com/niranjan-786/Resume_Screening_AI.git
 cd AI-Powered-Resume-Screening-System
 pip install -r requirements.txt
 python app.py
