@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Screening History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 14px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    .job-desc {
+      white-space: pre-wrap;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resume Screening History</h1>
+  <table>
+    <tr>
+      <th>Time</th>
+      <th>Resume</th>
+      <th>Score (%)</th>
+      <th>Job Description</th>
+    </tr>
+    {% for row in records %}
+    <tr>
+      <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      <td><a href="/view_resume/{{ row.resume_name }}" target="_blank">{{ row.resume_name }}</a></td>
+
+      <td>{{ row.score }}</td>
+      <td class="job-desc">{{ row.job_description }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
+<br>
+<a href="/download" class="history-button" style="background-color:#f39c12;">Download as CSV</a>
+<a href="/clear_history" class="history-button" style="background-color:#e74c3c;">Clear All History</a>
+<style>
+  td a {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+</style>
+

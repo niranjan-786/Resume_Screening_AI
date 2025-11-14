@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Resume Screening</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>AI-Powered Resume Screening System</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label for="job_description">Job Description:</label><br>
+      <textarea name="job_description" required rows="10" cols="80" placeholder="Paste job description here...">{{ job_description }}</textarea><br><br>
+
+      <label for="resumes">Upload Resumes (PDF):</label><br>
+      <input type="file" name="resumes[]" multiple required accept=".pdf"><br><br>
+
+      <button type="submit">Screen Resumes</button>
+      <a href="/history" class="history-button">View Screening History</a>
+
+    </form>
+    <script>
+      const input = document.querySelector('input[type="file"]');
+      input.addEventListener('change', () => {
+        alert(`${input.files.length} resume(s) selected for screening.`);
+      });
+    </script>
+
+
+    {% if results %}
+      <h2>Job Description</h2>
+      <p>{{ job_description }}</p>
+
+      <h2>Screening Results</h2>
+      <table>
+        <tr><th>Resume</th><th>Match Score (%)</th></tr>
+        {% for filename, score in results %}
+          <tr>
+            <td>{{ filename }}</td>
+            <td>{{ (score * 100) | round(2) }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>
